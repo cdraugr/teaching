@@ -10,7 +10,7 @@ def compile_one(absolute_path):
     try:
         subprocess.run([
             "g++", "-std=c++17",
-			"-Wall", "-Werror", "-Wextra",
+            "-Wall", "-Werror", "-Wextra",
             absolute_path, "-o", executable_absolute_path,
             "-fsanitize=address"
         ]).check_returncode()
