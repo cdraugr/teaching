@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-using i64 = std::int32_t;
+using i64 = std::int64_t;
 
 struct RaceInfo {
     i64 dist = 0;  // meters
