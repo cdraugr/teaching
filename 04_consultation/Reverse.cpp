@@ -2,7 +2,7 @@
 
 template <typename InputIt>
 void Reverse(InputIt first, InputIt last) {
-    for (; first++ != last && first-- != last; --last, ++first) {
+    for (; std::distance(first, last) > 0; ++first, --last) {
         std::swap(*first, *std::prev(last));
         // std::iter_swap(first, std::prev(last));
     }
