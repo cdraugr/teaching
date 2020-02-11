@@ -1,8 +1,10 @@
 #include <algorithm>
+#include <iterator>
 
 template <typename InputIt>
 void Reverse(InputIt first, InputIt last) {
-    for (; std::distance(first, last) > 0; ++first, --last) {
+    for (; first != last && std::next(first) != last; ++first, --last) {
+    // for (; std::distance(first, last) > 0; ++first, --last) {
         std::swap(*first, *std::prev(last));
         // std::iter_swap(first, std::prev(last));
     }
