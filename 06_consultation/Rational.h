@@ -9,10 +9,10 @@ class Rational {
 public:
     using i32 = std::int32_t;
 
-    Rational(i32 numer = 0, i32 denom = 1)
-        : numerator_{denom < 0 ? -numer : numer},
-            denominator_{denom < 0 ? -denom : denom} {
-            if (!denominator()) {
+    Rational(i32 numerator = 0, i32 denominator = 1)
+        : numerator_{denominator < 0 ? -numerator : numerator},
+            denominator_{denominator < 0 ? -denominator : denominator} {
+            if (!denominator) {
                 throw std::overflow_error("Divide by zero.");
             }
             normalize();
@@ -39,12 +39,12 @@ public:
         return left;
     }
 
-    Rational& operator++() {  // ++rational;
+    Rational& operator++() noexcept {  // ++rational;
         numerator_ += denominator();
         return *this;
     }
 
-    Rational operator++(int) {  // rational++;
+    Rational operator++(int) noexcept {  // rational++;
         Rational tmp(*this);
         operator++();
         return tmp;
@@ -60,14 +60,15 @@ private:
     i32 numerator_{}, denominator_{};
 };
 
-std::ostream& operator<<(std::ostream& out, const Rational& rational) {
+std::ostream& operator<<(std::ostream& out, const Rational& rational) noexcept {
    return out << rational.numerator() << " / " << rational.denominator() ;
 }
 
-bool operator==(const Rational& lft, const Rational& rht) {
-    return lft.numerator() == rht.numerator() &&
-            lft.denominator() == rht.denominator();
+bool operator==(const Rational& left, const Rational& right) noexcept {
+    return left.numerator() == right.numerator() &&
+            left.denominator() == right.denominator();
 }
-bool operator!=(const Rational& lft, const Rational& rht) {
-    return !(lft == rht);
+
+bool operator!=(const Rational& left, const Rational& right) noexcept {
+    return !(left == right);
 }
