@@ -27,8 +27,8 @@ public:
     }
 
     Rational& operator+=(const Rational& other) {
-        numerator_ *= other.denominator();
-        numerator_ += other.numerator() * denominator();
+        numerator_ = numerator() * other.denominator() +
+                    other.numerator() * denominator();
         denominator_ *= other.denominator();
         normalize();
         return *this;
