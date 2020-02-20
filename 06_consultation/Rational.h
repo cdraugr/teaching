@@ -26,7 +26,7 @@ public:
         return denominator_;
     }
 
-    Rational& operator+=(const Rational& other) {
+    Rational& operator+=(const Rational& other) noexcept {
         numerator_ = numerator() * other.denominator() +
                     other.numerator() * denominator();
         denominator_ *= other.denominator();
@@ -34,7 +34,7 @@ public:
         return *this;
     }
 
-    friend Rational operator+(Rational left, const Rational& right) {
+    friend Rational operator+(Rational left, const Rational& right) noexcept {
         left += right;
         return left;
     }
@@ -48,6 +48,14 @@ public:
         Rational tmp(*this);
         operator++();
         return tmp;
+    }
+
+    Rational operator+() const noexcept {  // +rational;
+        return *this;
+    }
+
+    Rational operator-() const noexcept {  // -rational;
+        return {-numerator(), denominator()};
     }
 
 private:
